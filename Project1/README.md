@@ -1,9 +1,10 @@
-<h1>Discuss the purpose of this database in the context of the startup, Sparkify, and their analytical goals.<h1>
-Ans:Saprkify is a online song streaming service. Users connect to the app and listen to songs based on there preferences. Sparkify woudl like to know/ analyse details around what songs are ruling the charts i.e what songs are heard more and what songs are heard less. Overall they need to know the anlytics around what are user preferences for the songs/ music on there application.
+<h2>Purpose and Goal</h2>
+Saprkify is a online song streaming service. Users connect to the app and listen to songs based on there preferences. Sparkify woudl like to know/ analyse details around what songs are ruling the 
+charts i.e what songs are heard more and what songs are heard less. Overall they need to know the anlytics around what are user preferences for the songs/ music on there application.
 
 
-Q: State and justify your database schema design and ETL pipeline.
-Ans: We have 3 Master/ dimension tables and 1 transaction table.
+<h2>Schema Design and ETL</h2>
+We have 3 Master/ dimension tables and 1 transaction table.
 a) Master tables:- Tables that hold the master data for 
     1) Songs: Woudl hold the data for all the songs avaialble on the application with song and artist details
     2) Users: Would have details around Users names etc
@@ -20,10 +21,8 @@ b) Similarly if some details of song ex: Song title, duration needs to change on
 
 
 
-
-[Optional] Provide example queries and results for song play analysis.
-
-Use Case:
+<h2> Example Queries</h2>
+<h3>Use Case: </h3>
 a) Find the charbusters for each day
        
         Select s.title, CAST(sp.start_time)  as Day,count(1) as SongCount  

@@ -7,6 +7,15 @@ from create_tables import *
 
 #Song file has 1 record each file so the values[0] is taken and expected to workfor inserting
 def process_song_file(cur, filepath):
+    """
+        This procedure processes a song file whose filepath has been provided as an arugment.
+        It extracts the song information in order to store it into the songs table.
+        Then it extracts the artist information in order to store it into the artists table.
+
+        :parameter:
+        * cur the cursor variable
+        * filepath the file path to the song file
+    """
     # open song file
     df = pd.read_json(filepath, lines=True)
     # insert song record
@@ -19,6 +28,17 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """
+           This procedure processes a log file whose filepath has been provided as an arugment.
+           It extracts the time information for creating and master table, creates a user table
+           that maintiants the list of all users accessing the application and then creates a
+           transaction table that has the reocrds for all users and there songs accessed, the
+           songs have been looked up on the basis of song, artisid and duration of song
+
+           :parameter:
+           * cur the cursor variable
+           * filepath the file path to the song file
+    """
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -30,9 +50,12 @@ def process_log_file(cur, filepath):
     
     # insert time data records
     time_data = [t,t.dt.hour,t.dt.day,t.dt.week,t.dt.month,t.dt.year,t.dt.weekday]
+
+    # Create Column lables
     column_labels =  ['timestamp','hour','day','week','month','year','weekday']
     time_df = pd.DataFrame.from_dict(pd.Series(time_data,index=column_labels).to_dict())
 
+    # iterate through rows and insert into the tables
     for i, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
 
@@ -64,6 +87,19 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """
+               This procedure processes a log file whose filepath has been provided as an arugment.
+               It extracts the time information for creating and master table, creates a user table
+               that maintiants the list of all users accessing the application and then creates a
+               transaction table that has the reocrds for all users and there songs accessed, the
+               songs have been looked up on the basis of song, artisid and duration of song
+
+               :parameter:
+               * cur: the cursor variable
+               * conn: connecation variable use to connect database
+               * filepath: the file path to the song file
+               * func: function to be called for triggering the flow.
+    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -83,7 +119,10 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
-   
+    """
+               This function is main contro flow from python
+
+    """
     #conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     #cur = conn.cursor()
     cur,conn = create_database()
