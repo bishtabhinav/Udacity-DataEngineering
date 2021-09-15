@@ -1,4 +1,4 @@
-Q: Discuss the purpose of this database in the context of the startup, Sparkify, and their analytical goals.
+<h1>Discuss the purpose of this database in the context of the startup, Sparkify, and their analytical goals.<h1>
 Ans:Saprkify is a online song streaming service. Users connect to the app and listen to songs based on there preferences. Sparkify woudl like to know/ analyse details around what songs are ruling the charts i.e what songs are heard more and what songs are heard less. Overall they need to know the anlytics around what are user preferences for the songs/ music on there application.
 
 
